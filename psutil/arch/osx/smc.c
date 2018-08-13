@@ -150,16 +150,10 @@ kern_return_t SMCReadKey(io_connect_t conn, UInt32Char_t key, SMCVal_t *val) {
 }
 
 
-double SMCGetTemperature(char *key) {
-    io_connect_t conn;
+double SMCGetTemperature(io_connect_t conn, char *key) {
     SMCVal_t val;
-    kern_return_t result;
     int intValue;
-
-    result = SMCOpen(&conn);
-    if (result != kIOReturnSuccess) {
-        return 0.0;
-    }
+    kern_return_t result;
 
     result = SMCReadKey(conn, key, &val);
     if (result == kIOReturnSuccess) {
@@ -174,7 +168,6 @@ double SMCGetTemperature(char *key) {
         }
     }
     // read failed
-    SMCClose(conn);
     return 0.0;
 }
 

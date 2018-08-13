@@ -172,8 +172,10 @@ typedef struct {
     SMCBytes_t              bytes;
 } SMCVal_t;
 
-double SMCGetTemperature(char *key);
+double SMCGetTemperature(io_connect_t conn, char *key);
 int SMCGetFanNumber(char *key);
 float SMCGetFanSpeed(int fanNum);
+kern_return_t SMCOpen(io_connect_t * conn);
+kern_return_t SMCClose(io_connect_t conn);
 
 #endif

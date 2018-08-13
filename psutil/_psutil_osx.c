@@ -904,14 +904,24 @@ psutil_boot_time(PyObject *self, PyObject *args) {
 static PyObject *
 psutil_sensors_temperatures(PyObject *self, PyObject *args) {
     float temp;
+    kern_return_t result;
+    io_connect_t conn;
+
     smc_key* iter_key = smc_keys;
     PyObject *py_tuple = NULL;
     PyObject *py_retlist = PyList_New(0);
 
     if (py_retlist == NULL)
         return NULL;
+
+    result = SMCOpen(&conn);
+    if (result != kIOReturnSuccess) {
+        PyErr_Format(PyExc_RuntimeError, "SMCOpen failed");
+        goto error;
+    }
+
     while (iter_key->key[0] != '\0') {
-        temp = SMCGetTemperature(iter_key->key);
+        temp = SMCGetTemperature(conn, iter_key->key);
         if (1) {  // TODO: remove this
         // if (temp > 0) {
             py_tuple = Py_BuildValue(
@@ -925,11 +935,13 @@ psutil_sensors_temperatures(PyObject *self, PyObject *args) {
         iter_key++;
     }
 
+    SMCClose(conn);
     return py_retlist;
 
 error:
     Py_DECREF(py_retlist);
     Py_XDECREF(py_tuple);
+    SMCClose(conn);
     return NULL;
 }
 
