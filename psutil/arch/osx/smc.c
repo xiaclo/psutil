@@ -157,17 +157,13 @@ double SMCGetTemperature(io_connect_t conn, char *key) {
 
     result = SMCReadKey(conn, key, &val);
     if (result == kIOReturnSuccess) {
-        // read succeeded - check returned value
         if (val.dataSize > 0) {
             if (strcmp(val.dataType, DATATYPE_SP78) == 0) {
-                // convert sp78 value to temperature
                 intValue = val.bytes[0] * 256 + (unsigned char)val.bytes[1];
-                SMCClose(conn);
                 return intValue / 256.0;
             }
         }
     }
-    // read failed
     return 0.0;
 }
 
