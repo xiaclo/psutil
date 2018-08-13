@@ -19,6 +19,12 @@
 #define SMC_KEY_FAN_NUM       "FNum"
 
 typedef struct {
+    char group[10];
+    char key[6];
+    char label[25];
+} smc_key;
+
+typedef struct {
     char                  major;
     char                  minor;
     char                  build;

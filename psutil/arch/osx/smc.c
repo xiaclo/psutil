@@ -202,7 +202,6 @@ float SMCGetFanSpeed(int fanNum)
 }
 
 
-
 int SMCGetFanNumber(char *key)
 {
     SMCVal_t val;
