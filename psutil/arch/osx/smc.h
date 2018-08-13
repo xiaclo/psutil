@@ -10,17 +10,8 @@
 #define KERNEL_INDEX_SMC      2
 
 #define SMC_CMD_READ_BYTES    5
-#define SMC_CMD_WRITE_BYTES   6
-#define SMC_CMD_READ_INDEX    8
 #define SMC_CMD_READ_KEYINFO  9
-#define SMC_CMD_READ_PLIMIT   11
-#define SMC_CMD_READ_VERS     12
 
-
-#define DATATYPE_FPE2         "fpe2"
-#define DATATYPE_UINT8        "ui8 "
-#define DATATYPE_UINT16       "ui16"
-#define DATATYPE_UINT32       "ui32"
 #define DATATYPE_SP78         "sp78"
 
 // Fans SMC key values
