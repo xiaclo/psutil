@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.join(HERE, "psutil"))
 
 from _common import AIX  # NOQA
 from _common import BSD  # NOQA
+from _common import DRAGONFLYBSD  # NOQA
 from _common import FREEBSD  # NOQA
 from _common import LINUX  # NOQA
 from _common import MACOS  # NOQA
@@ -191,6 +192,16 @@ elif NETBSD:
             'psutil/_psutil_bsd.c',
             'psutil/arch/netbsd/specific.c',
             'psutil/arch/netbsd/socks.c',
+        ],
+        define_macros=macros,
+        libraries=["kvm"])
+
+elif DRAGONFLYBSD:
+    macros.append(("PSUTIL_DRAGONFLYBSD", 1))
+    ext = Extension(
+        'psutil._psutil_bsd',
+        sources=sources + [
+            'psutil/_psutil_bsd.c',
         ],
         define_macros=macros,
         libraries=["kvm"])

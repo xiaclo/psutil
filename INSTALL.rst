@@ -102,10 +102,18 @@ NetBSD
 ======
 
 ::
+
     export PKG_PATH="ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/`uname -m`/`uname -r`/All"
     pkg_add -v pkgin
     pkgin install python gcc
     python -m pip install psutil
+
+DragonflyBSD
+============
+
+::
+
+    pkg install python3
 
 
 Solaris

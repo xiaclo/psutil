@@ -42,20 +42,21 @@
 #include <netinet/in.h>
 #include <netinet/in_systm.h>
 #include <netinet/ip.h>
-#include <netinet/in_pcb.h>
 #include <netinet/tcp.h>
 #include <netinet/tcp_timer.h>
 #include <netinet/ip_var.h>
+
+#ifndef PSUTIL_DRAGONFLYBSD
+#include <netinet/in_pcb.h>
 #include <netinet/tcp_var.h>   // for struct xtcpcb
+#endif
+
 #include <netinet/tcp_fsm.h>   // for TCP connection states
 #include <arpa/inet.h>         // for inet_ntop()
-
 #include <sys/mount.h>
-
 #include <net/if.h>       // net io counters
 #include <net/if_dl.h>
 #include <net/route.h>
-
 #include <netinet/in.h>   // process open files/connections
 #include <sys/un.h>
 
@@ -94,7 +95,14 @@
     #ifndef DTYPE_VNODE
         #define DTYPE_VNODE 1
     #endif
+// #elif PSUTIL_DRAGONFLYBSD
+//    #include <kcore.h>
 #endif
+
+
+#include <kcore.h>
+#include <sys/kinfo.h>
+#include <kvm.h>
 
 
 
