@@ -2017,6 +2017,20 @@ if hasattr(_psplatform, "cpu_freq"):
     __all__.append("cpu_freq")
 
 
+_loadcounter_init = False
+
+
+def getloadavg():
+    global _loadcounter_init
+    if POSIX:
+        return os.getloadavg()
+    else:
+        if not _loadcounter_init:
+            _psplatform.cext.init_loadcounter()
+            _loadcounter_init = True
+        return _psplatform.cext.get_loadcounter()
+
+
 # =====================================================================
 # --- system memory related functions
 # =====================================================================

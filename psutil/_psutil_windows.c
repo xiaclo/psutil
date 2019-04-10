@@ -40,6 +40,7 @@
 #include "arch/windows/process_handles.h"
 #include "arch/windows/inet_ntop.h"
 #include "arch/windows/services.h"
+#include "arch/windows/wmi.h"
 #include "_psutil_common.h"
 
 
@@ -3512,6 +3513,10 @@ PsutilMethods[] = {
      "Return battery metrics usage."},
     {"getpagesize", psutil_getpagesize, METH_VARARGS,
      "Return system memory page size."},
+    {"init_loadcounter", psutil_init_loadcounter, METH_VARARGS,
+     "XXX"},
+    {"get_loadcounter", psutil_get_loadcounter, METH_VARARGS,
+     "XXX"},
 
     // --- windows services
     {"winservice_enumerate", psutil_winservice_enumerate, METH_VARARGS,
